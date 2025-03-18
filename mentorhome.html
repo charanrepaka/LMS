@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Mentor Home</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+   <link rel="stylesheet" href="css/style.css">
+   <style>
+      /* Additional CSS for the new elements */
+      .stats-container {
+         display: flex;
+         justify-content: space-between;
+         margin: 20px 0;
+      }
+      .stat-box {
+         flex: 1;
+         background: #f9f9f9;
+         padding: 20px;
+         margin: 0 10px;
+         border-radius: 10px;
+         text-align: center;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .stat-box h3 {
+         margin: 0;
+         font-size: 18px;
+         color: #333;
+      }
+      .stat-box i {
+         font-size: 40px;
+         margin: 10px 0;
+         color: #007bff;
+      }
+      .stat-box p {
+         margin: 0;
+         font-size: 24px;
+         font-weight: bold;
+         color: #007bff;
+      }
+      .course-container {
+         display: flex;
+         align-items: center;
+         background: #f9f9f9;
+         padding: 20px;
+         margin: 20px 0;
+         border-radius: 10px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .course-image img {
+         width: 150px;
+         height: 100px;
+         border-radius: 10px;
+         margin-right: 20px;
+      }
+      .course-details {
+         flex: 1;
+      }
+      .course-details h2 {
+         margin: 0 0 10px;
+         font-size: 22px;
+         color: #333;
+      }
+      .course-details p {
+         margin: 0;
+         font-size: 16px;
+         color: #666;
+      }
+      .dropdown-button {
+         display: block;
+         width: 100%;
+         padding: 10px;
+         margin: 10px 0;
+         background: #007bff;
+         color: #fff;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         font-size: 16px;
+      }
+      .dropdown-content {
+         display: none;
+         background: #fff;
+         padding: 10px;
+         border: 1px solid #ddd;
+         border-radius: 5px;
+         margin-top: 10px;
+      }
+      .dropdown-content a {
+         display: block;
+         padding: 10px;
+         color: #333;
+         text-decoration: none;
+         border-bottom: 1px solid #eee;
+      }
+      .dropdown-content a:last-child {
+         border-bottom: none;
+      }
+      .dropdown-content a span.checkmark {
+         float: right;
+         color: #007bff;
+         cursor: pointer;
+      }
+   </style>
+</head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="home.html" class="logo">L.</a>
+      
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+      <div class="profile">
+         <img src="images/pic-2.jpg" class="image" alt="">
+         <h3 class="name">shaikh anas</h3>
+         <p class="role">Mentor</p>
+         <a href="mentorprofile.html" class="btn">view profile</a>
+      </div>
+   </section>
+</header>   
+
+<div class="side-bar">
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+   <div class="profile">
+      <img src="images/pic-2.jpg" class="image" alt="">
+      <h3 class="name">shaikh anas</h3>
+      <p class="role">Mentor</p>
+      <a href="mentorprofile.html" class="btn">view profile</a>
+   </div>
+   <nav class="navbar">
+      <a href="mentorhome.html"><i class="fas fa-home"></i><span>home</span></a>
+      <a href="mentoraddcourse.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+   </nav>
+</div>
+
+<!-- Stats Section -->
+<div class="stats-container">
+   <div class="stat-box">
+      <h3>Number of Students</h3>
+      <i class="fas fa-users"></i>
+      <p>120</p>
+   </div>
+   <div class="stat-box">
+      <h3>Courses Created</h3>
+      <i class="fas fa-graduation-cap"></i>
+      <p>3</p>
+   </div>
+</div>
+
+<!-- Dynamic Courses Section -->
+<div id="courses-list">
+   <!-- Courses will be dynamically added here -->
+</div>
+
+<script>
+   // Sample data for courses (replace with data from backend)
+   const courses = [
+      {
+         id: "html-course",
+         image: "images/htmlcourse.jpg",
+         title: "HTML Course",
+         description: "Learn the fundamentals of HTML5, the backbone of web development. This course covers everything from basic tags to advanced semantic elements, forms, multimedia integration, and accessibility best practices.",
+         topics: [
+            "Lesson 1: Introduction to HTML",
+            "Lesson 2: HTML Tags and Elements",
+            "Lesson 3: Forms and Inputs",
+            "Lesson 4: Multimedia Integration",
+            "Lesson 5: Accessibility Best Practices"
+         ]
+      },
+      {
+         id: "css-course",
+         image: "images/csscourse.jpg",
+         title: "CSS Course",
+         description: "Master the art of styling web pages with CSS3. This course covers selectors, box model, flexbox, grid, animations, and responsive design techniques.",
+         topics: [
+            "Lesson 1: Introduction to CSS",
+            "Lesson 2: Selectors and Box Model",
+            "Lesson 3: Flexbox and Grid",
+            "Lesson 4: Animations and Transitions",
+            "Lesson 5: Responsive Design"
+         ]
+      }
+   ];
+
+   // Function to dynamically render courses
+   function renderCourses() {
+      const coursesList = document.getElementById("courses-list");
+      coursesList.innerHTML = ""; // Clear existing content
+
+      courses.forEach(course => {
+         const courseHTML = `
+            <div id="${course.id}" class="course-container">
+               <div class="course-image">
+                  <img src="${course.image}" alt="${course.title}">
+               </div>
+               <div class="course-details">
+                  <h2>${course.title}</h2>
+                  <p>${course.description}</p>
+               </div>
+            </div>
+            <button class="dropdown-button" onclick="toggleDropdown('${course.id}-dropdown')">${course.title} Topics</button>
+            <div class="dropdown-content" id="${course.id}-dropdown">
+               ${course.topics.map(topic => `
+                  <a href="watch-video.html"><span>${topic}</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+               `).join("")}
+            </div>
+         `;
+         coursesList.insertAdjacentHTML("beforeend", courseHTML);
+      });
+   }
+
+   // Function to toggle dropdown content
+   function toggleDropdown(id) {
+      const dropdown = document.getElementById(id);
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+   }
+
+   // Function to toggle checkmark
+   function toggleCheckmark(event) {
+      event.stopPropagation();
+      const checkmark = event.target;
+      checkmark.textContent = checkmark.textContent === "✓" ? "" : "✓";
+   }
+
+   // Render courses on page load
+   document.addEventListener("DOMContentLoaded", renderCourses);
+</script>
+
+<script src="js/mentorjavascript.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+</html>

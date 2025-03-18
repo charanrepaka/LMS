@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>courses</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+   <style>
+        .course-container {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 80%; /* Adjust width as needed */
+            width: 80%; /* Adjust width as needed */
+            margin: 20px 20px 0 90px; /* Added left margin to shift container slightly to the left */
+        }
+        .course-image {
+            flex: 1;
+            padding: 20px;
+        }
+        .course-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .course-details {
+            flex: 2;
+            padding: 20px;
+        }
+
+        .course-details h2 {
+            margin: 0 0 10px;
+            font-size: 24px;
+        }
+
+        .course-details p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Dropdown Button Styling */
+        .dropdown-button {
+            width: 80%; /* Same width as course container */
+            margin: 10px 20px 20px 90px; /* Match course container margins */
+            background-color: #8e44ad; /* Light black background */
+            color: #fff; /* White text */
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: left;
+            position: relative;
+        }
+
+        .dropdown-button::after {
+            content: "▼"; /* Down arrow symbol */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .dropdown-content {
+            display: none; /* Hidden by default */
+            width: 80%; /* Same width as course container */
+            margin: 0 20px 20px 90px; /* Match course container margins */
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-content a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .checkmark {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #8e44ad;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 14px;
+            color: transparent;
+            cursor: pointer;
+        }
+
+        .checkmark.checked {
+            background-color: #8e44ad;
+            color: #fff;
+        }
+
+        .section-heading {
+            margin: 40px 20px 20px 90px; /* Match course container margins */
+            font-size: 28px;
+            color: #333;
+        }
+
+        @media (max-width: 600px) {
+            .course-container {
+                flex-direction: column;
+                margin: 20px auto; /* Center on smaller screens */
+            }
+
+            .course-image, .course-details {
+                flex: none;
+                width: 100%;
+                text-align: center;
+            }
+
+            .dropdown-button, .dropdown-content {
+                width: 90%; /* Adjust for smaller screens */
+                margin: 10px auto; /* Center on smaller screens */
+            }
+
+            .section-heading {
+                margin: 40px auto 20px auto; /* Center on smaller screens */
+                text-align: center;
+            }
+        }
+   </style>
+
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="home.html" class="logo">L.</a>
+
+      <form id="search-form" action="coursecontainer.html" method="get" class="search-form">
+        <input type="text" name="search_box" id="search-box" required placeholder="search courses..." maxlength="100">
+        <button type="submit" class="fas fa-search"></button>
+     </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="images/pic-1.jpg" class="image" alt="">
+         <h3 class="name">shaikh anas</h3>
+         <p class="role">student</p>
+         <a href="profile.html" class="btn">view profile</a>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">shaikh anas</h3>
+      <p class="role">student</p>
+      <a href="profile.html" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+    <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
+    <a href="coursecontainer.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+    <a href="Progress.html"><i class="fa-solid fa-bars-progress"></i><span>Progress</span></a>
+    <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
+    <a href="notifications.html"><i class="fa-solid fa-bell"></i><span>Notifications</span></a>
+    <a href="about.html"><i class="fas fa-question"></i><span>about</span></a>
+ </nav>
+
+</div>
+<!-- Heading1 -->
+<h2 class="section-heading">Learn How to Build Static Websites</h2>
+<!-- Course Group 1: HTML Course -->
+<div id="html-course" class="course-container">
+    <div class="course-image">
+        <img src="images\htmlcourse.jpg" alt="HTML Course">
+    </div>
+    <div class="course-details">
+        <h2>HTML Course</h2>
+        <p>Learn the fundamentals of HTML5, the backbone of web development. This course covers everything from basic tags to advanced semantic elements, forms, multimedia integration, and accessibility best practices. By the end of the course, you'll be able to create responsive, modern, and accessible websites.</p>
+    </div>
+</div>
+<button class="dropdown-button" onclick="toggleDropdown('dropdownContent1')">HTML Topics</button>
+<div class="dropdown-content" id="dropdownContent1">
+    <a href="watch-video.html"><span>Lesson 1: Introduction to HTML</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="watch-video.html"><span>Lesson 2: HTML Tags and Elements</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="watch-video.html"><span>Lesson 3: Forms and Inputs</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="watch-video.html"><span>Lesson 4: Multimedia Integration</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="watch-video.html"><span>Lesson 5: Accessibility Best Practices</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+</div>
+
+<!-- Course Group 2: CSS Course -->
+<div id="css-course" class="course-container">
+    <div class="course-image">
+        <img src="images\csscourse.jpg" alt="CSS Course">
+    </div>
+    <div class="course-details">
+        <h2>CSS Course</h2>
+        <p>Master the art of styling web pages with CSS. This course covers everything from basic selectors to advanced animations, flexbox, grid, and responsive design techniques. By the end of the course, you'll be able to create visually stunning and responsive websites.</p>
+    </div>
+</div>
+<button class="dropdown-button" onclick="toggleDropdown('dropdownContent2')">CSS Topics</button>
+<div class="dropdown-content" id="dropdownContent2">
+    <a href="#"><span>Lesson 1: Introduction to CSS</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 2: Selectors and Specificity</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 3: Flexbox and Grid</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 4: Animations and Transitions</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 5: Responsive Design</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+</div>
+
+<!-- Heading2 -->
+<h2 class="section-heading">Learn How to Build Responsive Websites</h2>
+
+<!-- Course Group 3: Bootstrap Course -->
+<div id="bootstrap-course" class="course-container">
+    <div class="course-image">
+        <img src="images\bootstrapcourse.jpg" alt="Bootstrap Course">
+    </div>
+    <div class="course-details">
+        <h2>Bootstrap Course</h2>
+        <p>Bootstrap is a popular open-source CSS framework used for building responsive and mobile-friendly web applications. It provides pre-designed components like buttons, forms, and grids, making web development faster and easier. With Bootstrap, developers can create visually appealing websites without writing extensive CSS.</p>
+    </div>
+</div>
+<button class="dropdown-button" onclick="toggleDropdown('dropdownContent3')">Bootstrap Topics</button>
+<div class="dropdown-content" id="dropdownContent3">
+    <a href="#"><span>Lesson 1: Introduction to Bootstrap</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 2: Bootstrap Grid System</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 3: Bootstrap Components</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 4: Bootstrap Utilities</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 5: Bootstrap Flexbox & Responsive Design</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+</div>
+
+<!-- Heading3 -->
+<h2 class="section-heading">Learn How to Build Dynamic Websites</h2>
+
+<!-- Course Group 4: JavaScript Course -->
+<div id="javascript-course" class="course-container">
+    <div class="course-image">
+        <img src="images\javascriptcourse.jpg" alt="JavaScript Course">
+    </div>
+    <div class="course-details">
+        <h2>JavaScript Course</h2>
+        <p>Learn JavaScript, the language of the web. This course covers everything from basic syntax to advanced concepts like closures, promises, and DOM manipulation. By the end of the course, you'll be able to build interactive and dynamic web applications.</p>
+    </div>
+</div>
+<button class="dropdown-button" onclick="toggleDropdown('dropdownContent4')">JavaScript Topics</button>
+<div class="dropdown-content" id="dropdownContent4">
+    <a href="#"><span>Lesson 1: Introduction to JavaScript</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 2: Variables and Data Types</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 3: Functions and Closures</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 4: DOM Manipulation</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 5: Promises and Async/Await</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+</div>
+
+<!-- Heading 4 -->
+<h2 class="section-heading">Learn How to Build Dynamic and Interactive User Interfaces</h2>
+
+<!-- Course Group 5: React Course -->
+<div id="react-course" class="course-container">
+    <div class="course-image">
+        <img src="images\reactjscourse.jpeg" alt="React Course">
+    </div>
+    <div class="course-details">
+        <h2>React Course</h2>
+        <p>Learn React, the most popular JavaScript library for building user interfaces. This course covers everything from JSX and components to state management and hooks. By the end of the course, you'll be able to build modern, scalable web applications.</p>
+    </div>
+</div>
+<button class="dropdown-button" onclick="toggleDropdown('dropdownContent5')">React Topics</button>
+<div class="dropdown-content" id="dropdownContent5">
+    <a href="#"><span>Lesson 1: Introduction to React</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 2: JSX and Components</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 3: State and Props</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 4: Hooks and Context API</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 5: Building a React App</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+</div>
+
+<!-- Heading 5 -->
+<h2 class="section-heading">Learn Backend</h2>
+
+<!-- Course Group 6: Node.js Course -->
+<div id="nodejs-course" class="course-container">
+    <div class="course-image">
+        <img src="images\nodejscourse.png" alt="Node.js Course">
+    </div>
+    <div class="course-details">
+        <h2>Node.js Course</h2>
+        <p>Learn Node.js, the runtime environment for building server-side applications. This course covers everything from basic modules to advanced topics like Express.js, REST APIs, and database integration. By the end of the course, you'll be able to build scalable backend systems.</p>
+    </div>
+</div>
+<button class="dropdown-button" onclick="toggleDropdown('dropdownContent6')">Node.js Topics</button>
+<div class="dropdown-content" id="dropdownContent6">
+    <a href="#"><span>Lesson 1: Introduction to Node.js</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 2: Modules and NPM</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 3: Express.js Framework</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 4: REST APIs</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 5: Database Integration</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+</div>
+
+<!-- Course Group 7: MongoDB Course -->
+<div id="mongodb-course" class="course-container">
+    <div class="course-image">
+        <img src="images\mongodbcourse.webp" alt="MongoDB Course">
+    </div>
+    <div class="course-details">
+        <h2>MongoDB Course</h2>
+        <p>Learn MongoDB, a NoSQL database used for scalable and high-performance applications. This course covers topics like document-oriented data storage, CRUD operations, indexing, and aggregation. By the end, you'll know how to integrate MongoDB with Node.js applications.</p>
+    </div>
+</div>
+<button class="dropdown-button" onclick="toggleDropdown('dropdownContent7')">MongoDB Topics</button>
+<div class="dropdown-content" id="dropdownContent8">
+    <a href="#"><span>Lesson 1: Introduction to Express.js</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 2: Middleware and Routing</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 3: Handling Requests and Responses</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 4: Creating REST APIs</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+    <a href="#"><span>Lesson 5: Authentication and Error Handling</span><span class="checkmark" onclick="toggleCheckmark(event)">✓</span></a>
+</div>
+
+
+
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+<script>
+    // JavaScript to toggle dropdown visibility
+    function toggleDropdown(id) {
+        const dropdownContent = document.getElementById(id);
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } else {
+            dropdownContent.style.display = "block";
+        }
+    }
+
+    // JavaScript to toggle checkmark background color
+    function toggleCheckmark(event) {
+        event.preventDefault(); // Prevent the default link behavior
+        const checkmark = event.currentTarget.querySelector('.checkmark') || event.currentTarget;
+        checkmark.classList.toggle('checked');
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Add Course</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+   <link rel="stylesheet" href="css\style.css">
+   <style>
+       .container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 18rem;
+    margin-left: 27rem;
+ }
+
+ h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 2rem;
+ }
+
+ .form-group {
+    margin-bottom: 1.5rem;
+ }
+
+ .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #555;
+ }
+ 
+ .form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+ }
+
+ .form-group input:focus {
+    outline: none;
+    border-color: #8e44ad;
+ }
+
+ .subbtn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #8e44ad;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+ }
+
+ .subbtn:hover {
+    background-color: #732d91;
+ }
+
+.lesson-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.lesson-group input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.lesson-group input:focus {
+    outline: none;
+    border-color: #8e44ad;
+}
+
+   </style>
+</head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="home.html" class="logo">L.</a>
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+      <div class="profile">
+         <img src="images\pic-1.jpg" class="image" alt="">
+         <h3 class="name">shaikh anas</h3>
+         <p class="role">Mentor</p>
+         <a href="profile.html" class="btn">view profile</a>
+      </div>
+   </section>
+</header>   
+
+<div class="side-bar">
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+   <div class="profile">
+      <img src="images\pic-1.jpg" class="image" alt="">
+      <h3 class="name">shaikh anas</h3>
+      <p class="role">Mentor</p>
+      <a href="profile.html" class="btn">view profile</a>
+   </div>
+   <nav class="navbar">
+      <a href="mentorhome.html"><i class="fas fa-home"></i><span>home</span></a>
+      <a href="mentoraddcourse.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+   </nav>
+</div>
+
+<div class="container">
+    <h1>Add Course</h1>
+    <form id="course-form">
+       <!-- Course Name Field -->
+       <div class="form-group">
+          <label for="course-name">Course Name</label>
+          <input type="text" id="course-name" name="course-name" placeholder="Enter course name" required>
+       </div>
+
+       <!-- Lesson Fields Container -->
+       <div id="lesson-fields">
+          <!-- Lesson fields will be dynamically added here -->
+       </div>
+
+       <!-- Add Lesson Button -->
+       <button type="button" id="add-lesson-btn" class="subbtn">
+          <i class="fas fa-plus"></i> Add Lesson
+       </button>
+
+       <!-- Submit Button -->
+       <button type="submit" class="subbtn submit-btn">Submit</button>
+    </form>
+ </div>
+<script src="js\script.js"></script>
+</body>
+</html>

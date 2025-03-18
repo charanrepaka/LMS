@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>watch</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+   <!-- Internal CSS -->
+   <style>
+      @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+      :root {
+         --main-color: #8e44ad;
+         --red: #e74c3c;
+         --orange: #f39c12;
+         --white: #fff;
+         --black: #2c3e50;
+         --light-color: #888;
+         --light-bg: #eee;
+         --border: .1rem solid rgba(0, 0, 0, .2);
+      }
+
+      * {
+         font-family: 'Nunito', sans-serif;
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+         outline: none;
+         border: none;
+         text-decoration: none;
+      }
+
+      *::selection {
+         background-color: var(--main-color);
+         color: #fff;
+      }
+
+      *::-webkit-scrollbar {
+         height: .5rem;
+         width: 1rem;
+      }
+
+      *::-webkit-scrollbar-track {
+         background-color: transparent;
+      }
+
+      *::-webkit-scrollbar-thumb {
+         background-color: var(--main-color);
+      }
+
+      html {
+         font-size: 62.5%;
+         overflow-x: hidden;
+      }
+
+      body {
+         background-color: var(--light-bg);
+         padding-left: 30rem;
+      }
+
+      body.dark {
+         --white: #222;
+         --black: #fff;
+         --light-color: #aaa;
+         --light-bg: #333;
+         --border: .1rem solid rgba(255, 255, 255, .2);
+      }
+
+      body.active {
+         padding-left: 0;
+      }
+
+      section {
+         padding: 2rem;
+         max-width: 1200px;
+         margin: 0 auto;
+      }
+
+      .btn,
+      .option-btn,
+      .delete-btn,
+      .inline-btn,
+      .inline-option-btn,
+      .inline-delete-btn {
+         border-radius: .5rem;
+         padding: 1rem 3rem;
+         font-size: 1.8rem;
+         color: #fff;
+         margin-top: 1rem;
+         text-transform: capitalize;
+         cursor: pointer;
+         text-align: center;
+      }
+
+      .btn,
+      .option-btn,
+      .delete-btn {
+         display: block;
+         width: 100%;
+      }
+
+      .inline-btn,
+      .inline-option-btn,
+      .inline-delete-btn {
+         display: inline-block;
+      }
+
+      .btn,
+      .inline-btn {
+         background-color: var(--main-color);
+      }
+
+      .option-btn,
+      .inline-option-btn {
+         background-color: var(--orange);
+      }
+
+      .delete-btn,
+      .inline-delete-btn {
+         background-color: var(--red);
+      }
+
+      .btn:hover,
+      .option-btn:hover,
+      .delete-btn:hover,
+      .inline-btn:hover,
+      .inline-option-btn:hover,
+      .inline-delete-btn:hover {
+         background-color: var(--black);
+         color: var(--white);
+      }
+
+      .flex-btn {
+         display: flex;
+         gap: 1rem;
+      }
+
+      .message {
+         position: sticky;
+         top: 0;
+         margin: 0 auto;
+         background-color: var(--light-bg);
+         padding: 2rem;
+         display: flex;
+         align-items: center;
+         gap: 1rem;
+         justify-content: space-between;
+      }
+
+      .message.form {
+         max-width: 1200px;
+         margin: 0 auto;
+         background-color: var(--white);
+         top: 2rem;
+         border-radius: .5rem;
+      }
+
+      .message span {
+         font-size: 2rem;
+         color: var(--black);
+      }
+
+      .message i {
+         font-size: 2.5rem;
+         color: var(--red);
+         cursor: pointer;
+         transition: .2s linear;
+      }
+
+      .message i:hover {
+         transform: rotate(90deg);
+      }
+
+      .empty {
+         background-color: var(--white);
+         border-radius: .5rem;
+         padding: 1.5rem;
+         text-align: center;
+         width: 100%;
+         font-size: 2rem;
+         color: var(--red);
+      }
+
+      .heading {
+         padding-bottom: 1.8rem;
+         border-bottom: var(--border);
+         font-size: 2.5rem;
+         color: var(--black);
+         text-transform: capitalize;
+         margin-bottom: 3rem;
+      }
+
+      .header {
+         background-color: var(--white);
+         border-bottom: var(--border);
+         position: sticky;
+         top: 0;
+         left: 0;
+         right: 0;
+         z-index: 1000;
+      }
+
+      .header .flex {
+         padding: 1.5rem 2rem;
+         position: relative;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+      }
+
+      .header .flex .logo {
+         font-size: 2.5rem;
+         color: #fff;
+         font-weight: bolder;
+         background-color: #8e44ad;
+         padding: 5px 12px;
+         border-radius: 5px;
+      }
+
+      .header .flex .search-form {
+         width: 50rem;
+         border-radius: .5rem;
+         display: flex;
+         align-items: center;
+         gap: 2rem;
+         padding: 1.5rem 2rem;
+         background-color: var(--light-bg);
+      }
+
+      .header .flex .search-form input {
+         width: 100%;
+         background: none;
+         font-size: 2rem;
+         color: var(--black);
+      }
+
+      .header .flex .search-form button {
+         font-size: 2rem;
+         color: var(--black);
+         cursor: pointer;
+         background: none;
+      }
+
+      .header .flex .search-form button:hover {
+         color: var(--main-color);
+      }
+
+      .header .flex .icons div {
+         font-size: 2rem;
+         color: var(--black);
+         border-radius: .5rem;
+         height: 4.5rem;
+         cursor: pointer;
+         width: 4.5rem;
+         line-height: 4.4rem;
+         background-color: var(--light-bg);
+         text-align: center;
+         margin-left: .5rem;
+      }
+
+      .header .flex .icons div:hover {
+         background-color: var(--black);
+         color: var(--white);
+      }
+
+      #search-btn {
+         display: none;
+      }
+
+      .header .flex .profile {
+         position: absolute;
+         top: 120%;
+         right: 2rem;
+         background-color: var(--white);
+         border-radius: .5rem;
+         padding: 2rem;
+         text-align: center;
+         width: 30rem;
+         transform: scale(0);
+         transform-origin: top right;
+      }
+
+      .header .flex .profile.active {
+         transform: scale(1);
+         transition: .2s linear;
+      }
+
+      .header .flex .profile img {
+         height: 10rem;
+         width: 10rem;
+         border-radius: 50%;
+         object-fit: cover;
+         margin-bottom: .5rem;
+      }
+
+      .header .flex .profile h3 {
+         font-size: 2rem;
+         color: var(--black);
+      }
+
+      .header .flex .profile span {
+         color: var(--light-color);
+         font-size: 1.6rem;
+      }
+
+      .side-bar {
+         position: fixed;
+         top: 0;
+         left: 0;
+         height: 100vh;
+         width: 30rem;
+         background-color: var(--white);
+         border-right: var(--border);
+         z-index: 1200;
+      }
+
+      .side-bar .close-side-bar {
+         text-align: right;
+         padding: 2rem;
+         padding-bottom: 0;
+         display: none;
+      }
+
+      .side-bar .close-side-bar i {
+         height: 4.5rem;
+         width: 4.5rem;
+         line-height: 4.4rem;
+         font-size: 2.5rem;
+         color: #fff;
+         cursor: pointer;
+         background-color: var(--red);
+         text-align: center;
+         border-radius: .5rem;
+      }
+
+      .side-bar .close-side-bar i:hover {
+         background-color: var(--black);
+      }
+
+      .side-bar .profile {
+         padding: 3rem 2rem;
+         text-align: center;
+      }
+
+      .side-bar .profile img {
+         height: 10rem;
+         width: 10rem;
+         border-radius: 50%;
+         object-fit: cover;
+         margin-bottom: .5rem;
+      }
+
+      .side-bar .profile h3 {
+         font-size: 2rem;
+         color: var(--black);
+      }
+
+      .side-bar .profile span {
+         color: var(--light-color);
+         font-size: 1.6rem;
+      }
+
+      .side-bar .navbar a {
+         display: block;
+         padding: 2rem;
+         margin: .5rem 0;
+         font-size: 1.8rem;
+      }
+
+      .side-bar .navbar a i {
+         color: var(--main-color);
+         margin-right: 1.5rem;
+         transition: .2s linear;
+      }
+
+      .side-bar .navbar a span {
+         color: var(--light-color);
+      }
+
+      .side-bar .navbar a:hover {
+         background-color: var(--light-bg);
+      }
+
+      .side-bar .navbar a:hover i {
+         margin-right: 2.5rem;
+      }
+
+      .side-bar.active {
+         left: -31rem;
+      }
+
+      .footer {
+         position: sticky;
+         bottom: 0;
+         right: 0;
+         left: 0;
+         background-color: var(--white);
+         border-top: var(--border);
+         padding: 2.5rem 2rem;
+         text-align: center;
+         color: var(--black);
+         font-size: 2rem;
+         margin-top: 1.5rem;
+         z-index: 1000;
+      }
+
+      .footer span {
+         color: var(--main-color);
+      }
+
+      @media (max-width: 1200px) {
+         body {
+            padding-left: 0;
+         }
+
+         .side-bar {
+            transition: .2s linear;
+            left: -30rem;
+         }
+
+         .side-bar.active {
+            left: 0;
+            box-shadow: 0 0 0 100vw rgba(0, 0, 0, .7);
+         }
+
+         .side-bar .close-side-bar {
+            display: block;
+         }
+      }
+
+      @media (max-width: 991px) {
+         html {
+            font-size: 55%;
+         }
+      }
+
+      @media (max-width: 768px) {
+         #search-btn {
+            display: inline-block;
+         }
+
+         .header .flex .search-form {
+            position: absolute;
+            top: 99%;
+            left: 0;
+            right: 0;
+            width: auto;
+            border-top: var(--border);
+            border-bottom: var(--border);
+            background-color: var(--white);
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            transition: .2s linear;
+         }
+
+         .header .flex .search-form.active {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+         }
+
+         .form-container .flex {
+            display: flex;
+            gap: 0;
+            flex-flow: column;
+         }
+
+         .watch-video .video-details .video {
+            height: 30rem;
+         }
+      }
+
+      @media (max-width: 450px) {
+         html {
+            font-size: 50%;
+         }
+
+         .heading {
+            font-size: 2rem;
+         }
+
+         .flex-btn {
+            flex-flow: column;
+            gap: 0;
+         }
+
+         .about .row .image img {
+            height: auto;
+         }
+
+         .playlist .row .col .thumb {
+            height: 20rem;
+         }
+
+         .contact .row .image img {
+            height: auto;
+         }
+
+         .courses .box-container {
+            grid-template-columns: 1fr;
+         }
+
+         .videos-container .box-container {
+            grid-template-columns: 1fr;
+         }
+
+         .teachers .box-container {
+            grid-template-columns: 1fr;
+         }
+
+         .watch-video .video-details .video {
+            height: auto;
+         }
+      }
+
+      .watch-video .video-details .video {
+         height: auto;
+      }
+
+      /* Add new styles for tutor and comments sections */
+      .tutor {
+         padding: 1.5rem;
+         background-color: var(--white);
+         border-radius: .5rem;
+         margin-top: 1rem;
+      }
+
+      .tutor-info {
+         display: flex;
+         align-items: center;
+         gap: 2rem;
+      }
+
+      .tutor img {
+         width: 7rem;
+         height: 7rem;
+         border-radius: 50%;
+         object-fit: cover;
+      }
+
+      .tutor .info h3 {
+         font-size: 2rem;
+         color: var(--black);
+         margin-bottom: .5rem;
+      }
+
+      .tutor .info span {
+         color: var(--light-color);
+         font-size: 1.6rem;
+      }
+
+      .add-comment {
+         background-color: var(--white);
+         border-radius: .5rem;
+         padding: 2rem;
+         margin: 2rem 0;
+      }
+
+      .add-comment h4 {
+         font-size: 2rem;
+         color: var(--black);
+         margin-bottom: 1.5rem;
+      }
+
+      .add-comment textarea {
+         width: 80%;
+         display: block;
+         margin: 0 auto;
+         background-color: var(--light-bg);
+         border-radius: .5rem;
+         padding: 1.5rem;
+         font-size: 1.8rem;
+         color: var(--black);
+         margin-bottom: 2rem;
+         resize: none;
+      }
+
+      .add-comment .btn {
+         display: block;
+         margin: 0 auto;
+         width: auto;
+         min-width: 20rem;
+      }
+
+      /* Add styles for comments display */
+      .box-container {
+         display: flex;
+         flex-direction: column;
+         gap: 2rem;
+         margin-top: 2rem;
+      }
+
+      .box-container .box {
+         background-color: var(--white);
+         border-radius: .5rem;
+         padding: 2rem;
+         box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+      }
+
+      .box-container .box .user {
+         display: flex;
+         align-items: center;
+         gap: 1.5rem;
+         margin-bottom: 1rem;
+      }
+
+      .box-container .box .user h3 {
+         font-size: 1.8rem;
+         color: var(--black);
+         font-weight: 500;
+      }
+
+      .box-container .box .comment-box {
+         font-size: 1.6rem;
+         color: var(--light-color);
+         line-height: 1.5;
+         white-space: pre-wrap;
+         word-wrap: break-word;
+      }
+   </style>
+</head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="home.html" class="logo">L.</a>
+      <form action="search.html" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+      <div class="profile">
+         <img src="images/pic-1.jpg" class="image" alt="">
+         <h3 class="name">shaikh anas</h3>
+         <p class="role">student</p>
+         <a href="profile.html" class="btn">view profile</a>
+      </div>
+   </section>
+</header>
+
+<div class="side-bar">
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+   <div class="profile">
+      <img src="images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">shaikh anas</h3>
+      <p class="role">student</p>
+      <a href="profile.html" class="btn">view profile</a>
+   </div>
+   <nav class="navbar">
+      <a href="home.html" ><i class="fas fa-home"></i><span>home</span></a>
+      <a href="coursecontainer.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+      <a href="Progress.html"><i class="fa-solid fa-bars-progress"></i><span>Progress</span></a>
+      <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
+      <a href="notifications.html"><i class="fa-solid fa-bell"></i><span>Notifications</span></a>
+      <a href="about.html"><i class="fas fa-question"></i><span>about</span></a>
+   </nav>
+</div>
+
+<section class="watch-video">
+   <div class="video-container">
+      <div class="video">
+         <video src="images/vid-1.mp4" controls poster="images/post-1-1.png" id="video"></video>
+      </div>
+      <h3 class="title">complete HTML tutorial (part 01)</h3>
+      <div class="tutor">
+         <div class="tutor-info">
+            <img src="images/pic-2.jpg" alt="">
+            <div class="info">
+               <h3>john deo</h3>
+               <span>developer</span>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<section class="comments">
+   <h1 class="heading">comments</h1>
+   <form action="" class="add-comment">
+      <h4>add comment</h4>
+      <textarea name="comment_box" placeholder="enter your comment" required maxlength="1000" cols="30" rows="10"></textarea>
+      <button type="submit" class="btn" name="add_comment">add comment</button>
+   </form>
+   <h1 class="heading">user comments</h1>
+   <div class="box-container">
+      <div class="box">
+         <div class="user">
+            <h3>shaikh anas</h3>
+         </div>
+         <div class="comment-box">this is a comment from shaikh anas</div>
+      </div>
+   </div>
+</section>
+
+
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+   
+</body>
+</html>
